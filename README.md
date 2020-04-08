@@ -7,7 +7,6 @@
 docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" spencezhou/elasticsearch
 
 可以添加 -v mydata:/usr/share/elasticsearch/data 将es数据存储到制定路径
-
 ## 设置密码
 
 详情参照官方教程
@@ -17,30 +16,30 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-secu
 2. sh /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
 生成随机密码，可以运行  sh /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive 手动配置密码
 3. 记录自动生成的账户及密码，示例如下：
-```
-Initiating the setup of passwords for reserved users elastic,apm_system,kibana,logstash_system,beats_system,remote_monitoring_user.
-The passwords will be randomly generated and printed to the console.
-Please confirm that you would like to continue [y/N]y
 
 
-Changed password for user apm_system
-PASSWORD apm_system = HwyK4zcUXEv48NIVHxxx
+    Initiating the setup of passwords for reserved users elastic,apm_system,kibana,logstash_system,beats_system,remote_monitoring_user.
+    The passwords will be randomly generated and printed to the console.
+    Please confirm that you would like to continue [y/N]y
+    
+    Changed password for user apm_system
+    PASSWORD apm_system = HwyK4zcUXEv48NIVHxxx
+    
+    Changed password for user kibana
+    PASSWORD kibana = fvZnBmqoIKV0Um3DRxxx
+    
+    Changed password for user logstash_system
+    PASSWORD logstash_system = 6f16Qrm0knzkgSMxxxx
+    
+    Changed password for user beats_system
+    PASSWORD beats_system = ouQwUu8ltR86ExRrUxxx
+    
+    Changed password for user remote_monitoring_user
+    PASSWORD remote_monitoring_user = CV2Pe1MwaOaFRwxXyxxx
+    
+    Changed password for user elastic
+    PASSWORD elastic = ifkh0SknS8oomCdfOxxx
 
-Changed password for user kibana
-PASSWORD kibana = fvZnBmqoIKV0Um3DRxxx
-
-Changed password for user logstash_system
-PASSWORD logstash_system = 6f16Qrm0knzkgSMxxxx
-
-Changed password for user beats_system
-PASSWORD beats_system = ouQwUu8ltR86ExRrUxxx
-
-Changed password for user remote_monitoring_user
-PASSWORD remote_monitoring_user = CV2Pe1MwaOaFRwxXyxxx
-
-Changed password for user elastic
-PASSWORD elastic = ifkh0SknS8oomCdfOxxx
-```
 
 4. 在浏览器中访问 http://127.0.0.1:9200 输入密码查看ES运行情况 
 
