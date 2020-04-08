@@ -17,6 +17,7 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-secu
 生成随机密码，可以运行  sh /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive 手动配置密码
 3. 记录自动生成的账户及密码，示例如下：
 
+
     Initiating the setup of passwords for reserved users elastic,apm_system,kibana,logstash_system,beats_system,remote_monitoring_user.
     The passwords will be randomly generated and printed to the console.
     Please confirm that you would like to continue [y/N]y
@@ -63,4 +64,3 @@ xpack.monitoring.ui.container.elasticsearch.enabled: false
 docker run -d --name kibana -p 5601:5601 -v /home/docker/elasticsearch/kibana.yml:/usr/share/kibana/config/kibana.yml kibana
 
 3. 在浏览器中访问 http://127.0.0.1:5601 输入密码查看ES运行情况，需要用 elastic账号进行登录，其他账号提示权限不足。
-
