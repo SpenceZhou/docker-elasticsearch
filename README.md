@@ -40,10 +40,11 @@ Changed password for user elastic
 PASSWORD elastic = ifkh0SknS8oomCdfOxxx
 ```
 
+4. 在浏览器中访问 http://127.0.0.1:9200 输入密码查看ES运行情况 
+
 ## 安装Kibana
 
-### 
-创建kibana.yml配置文件内容如下：
+1. 创建kibana.yml配置文件内容如下：
 
 ```
 server.name: kibana
@@ -58,7 +59,7 @@ xpack.security.enabled: true
 xpack.monitoring.ui.container.elasticsearch.enabled: false
 ```
 
-启动docker
-docker run -d --name kibana -p 5601:5601 -v /home/docker/elasticsearch/kibana.yml:/usr/share/kibana/config/kibana.yml kibana:7.6.2
+2. 启动docker
+docker run -d --name kibana -p 5601:5601 -v /home/docker/elasticsearch/kibana.yml:/usr/share/kibana/config/kibana.yml kibana
 
-
+3. 在浏览器中访问 http://127.0.0.1:5601 输入密码查看ES运行情况，需要用 elastic账号进行登录，其他账号提示权限不足。
