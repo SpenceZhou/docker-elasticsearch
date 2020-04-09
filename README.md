@@ -58,6 +58,8 @@ elasticsearch.password: fvZnBmqoIKV0Um3Dxxx
 # 开启x-pack的权限
 xpack.security.enabled: true
 xpack.monitoring.ui.container.elasticsearch.enabled: false
+# 设置Kibana中文
+i18n.locale: "zh-CN"
 ```
 
 2. 启动docker
