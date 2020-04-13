@@ -6,7 +6,7 @@
 
 docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" spencezhou/elasticsearch
 
-可以添加 -v mydata:/usr/share/elasticsearch/data 将es数据存储到制定路径
+可以添加 -v mydata:/usr/share/elasticsearch/data 将es数据存储到制定路径，注意添加 --privileged=true ，如果发现无法正常启动无权限则 运行 chmod -R 777 [mydata]
 ## 设置密码
 
 详情参照官方教程
