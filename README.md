@@ -44,7 +44,8 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-secu
 4. 在浏览器中访问 http://127.0.0.1:9200 输入密码查看ES运行情况 
 
 5. 生产环境配置
-  参照官方文档 https://www.elastic.co/guide/en/elasticsearch/reference/7.6/docker.html docker run 添加下面参数
+
+参照官方文档 https://www.elastic.co/guide/en/elasticsearch/reference/7.6/docker.html docker run 添加下面参数
 
 * 调整JVM内存大小（默认配置为1G）
 
