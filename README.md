@@ -49,15 +49,15 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-secu
 
 docker run 添加下面参数
 
-*. 调整JVM内存大小（默认配置为1G）
+* 调整JVM内存大小（默认配置为1G）
 
     -e ES_JAVA_OPTS="-Xms8g -Xmx8g"  
 
-*. Increase ulimits for nofile and nproc
+* Increase ulimits for nofile and nproc
 
     --ulimit nofile=65535:65535
 
-*. Disable swapping
+* Disable swapping
 
     -e "bootstrap.memory_lock=true" --ulimit memlock=-1:-1
 
