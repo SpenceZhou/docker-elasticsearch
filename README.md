@@ -43,6 +43,24 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-secu
 
 4. 在浏览器中访问 http://127.0.0.1:9200 输入密码查看ES运行情况 
 
+5. 生产环境配置
+
+参照官方文档 https://www.elastic.co/guide/en/elasticsearch/reference/7.6/docker.html
+
+docker run 添加下面参数
+
+a. 调整JVM内存大小（默认配置为1G）
+
+    -e ES_JAVA_OPTS="-Xms8g -Xmx8g"  
+
+b. Increase ulimits for nofile and nproc
+
+    --ulimit nofile=65535:65535
+
+c. Disable swapping
+
+    -e "bootstrap.memory_lock=true" --ulimit memlock=-1:-1
+
 ## 安装Kibana
 
 1. 创建kibana.yml配置文件内容如下：
