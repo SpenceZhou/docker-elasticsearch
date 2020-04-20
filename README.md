@@ -4,7 +4,7 @@
 
 ## 运行命令
 
-docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" spencezhou/elasticsearch
+docker run -d --name es -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" spencezhou/elasticsearch:7.6.2
 
 可以添加 -v mydata:/usr/share/elasticsearch/data 将es数据存储到制定路径，注意添加 --privileged=true ，如果发现无法正常启动无权限则 运行 chmod -R 777 [mydata]
 ## 设置密码
@@ -81,7 +81,7 @@ i18n.locale: "zh-CN"
 2. 启动docker
 
 ```
-docker run -d --name kibana -p 5601:5601 -v /home/docker/elasticsearch/kibana.yml:/usr/share/kibana/config/kibana.yml kibana
+docker run -d --name kibana -p 5601:5601 -v /home/docker/elasticsearch/kibana.yml:/usr/share/kibana/config/kibana.yml kibana:7.6.2
 ```
 3. 访问Kibana
 
