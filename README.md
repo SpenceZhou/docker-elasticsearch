@@ -59,6 +59,39 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-secu
 
     -e "bootstrap.memory_lock=true" --ulimit memlock=-1:-1
 
+
+## 多节点docker部署集群
+
+### node01
+```
+docker run -d --name es01 -p 9200:9200 -p 9300:9300 \
+-e "cluster.name=elastic-cluster" \
+-e "node.name=es01" \
+-e "network.publish_host=es01" \
+-e "discovery.seed_hosts=es02" \
+-e "cluster.initial_master_nodes=es01,es02" \
+--add-host es01:192.168.1.110 \
+--add-host es02:192.168.1.111 \
+spencezhou/elasticsearch:7.6.2
+```
+
+### node02
+
+```
+docker run -d --name es02 -p 9200:9200 -p 9300:9300 \
+-e "cluster.name=elastic-cluster" \
+-e "node.name=es02" \
+-e "network.publish_host=es02" \
+-e "discovery.seed_hosts=es01" \
+-e "cluster.initial_master_nodes=es01,es02" \
+--add-host es01:192.168.1.110 \
+--add-host es02:192.168.1.111 \
+spencezhou/elasticsearch:7.6.2
+```
+
+启动后在任意一个node上面执行密码设置即可。
+
+
 ## 安装Kibana
 
 1. 创建kibana.yml配置文件内容如下：
