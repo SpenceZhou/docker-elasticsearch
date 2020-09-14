@@ -119,3 +119,83 @@ docker run -d --name kibana -p 5601:5601 -v /home/docker/elasticsearch/kibana.ym
 3. 访问Kibana
 
 在浏览器中访问 http://127.0.0.1:5601 输入密码查看ES运行情况，需要用 elastic账号进行登录，其他账号提示权限不足。
+
+## 安装Logstash
+
+1. 创建logstash.yml 文件内容如下：
+
+```
+path.config: /usr/share/logstash/config/logstash.conf   #配置文件目录
+
+```
+
+2. 创建logstash.conf 文件内容如下：
+```
+
+# Sample Logstash configuration for creating a simple
+# TCP -> Logstash -> Elasticsearch pipeline.
+
+input {
+  tcp {
+    mode => "server"
+    host => "0.0.0.0"
+    port => 5044
+    codec => json_lines
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://xxx:9200"]
+    user => "elastic"
+    password => "pwd"
+    index => "app-log-%{+YYYY.MM.dd}"
+  }
+}
+```
+3. 启动docker
+
+```
+docker run -d --name logstash -p5044:5044 -v `pwd`/logstash.conf:/usr/share/logstash/config/logstash.conf -v `pwd`/logstash.yml:/usr/share/logstash/config/logstash.yml  logstash:7.6.
+```
+
+4. springboot项目引入
+
+pom.xml文件添加依赖
+```
+
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+</dependency>
+<dependency>
+    <groupId>net.logstash.logback</groupId>
+    <artifactId>logstash-logback-encoder</artifactId>
+<version>${logstash-logback-encoder.version}</version>
+            
+```
+在resources中添加日志配置文件“logback-spring.xml”
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>ip:5044</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+
+    <root level="WARN">
+        <appender-ref ref="LOGSTASH" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <logger level="INFO" name="com.gxjhmall" additivity="false">
+        <appender-ref ref="LOGSTASH" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+</configuration>
+
+```
+
+5. 在浏览器中访问Kibana http://127.0.0.1:5601 输入密码查看日志运行情况，需要用 elastic账号进行登录，其他账号提示权限不足。
